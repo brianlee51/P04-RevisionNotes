@@ -50,6 +50,24 @@ public class DBHelper extends SQLiteOpenHelper {
 		db.close();
 	}
 
+	public boolean dbContain(String noteContent) {
+		String selectQuery = "SELECT " + COLUMN_NOTE_CONTENT
+				+ " FROM " + TABLE_NOTE
+				+ " WHERE " + COLUMN_NOTE_CONTENT + " == '" + noteContent + "'";
+
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
+		int count = cursor.getCount();
+		boolean isInDB = false;
+		cursor.close();
+		db.close();
+		if (count > 0) {
+			isInDB = true;
+		}
+
+		return isInDB;
+	}
+
 	public ArrayList<Note> getAllNotes() {
 		//TODO return records in Java objects
 		ArrayList<Note> notes = new ArrayList<Note>();
@@ -102,4 +120,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return notes;
     }
+
+
 }

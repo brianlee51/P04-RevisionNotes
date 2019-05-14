@@ -29,13 +29,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String text = etNote.getText().toString();
-                int selectedButtonId = rg.getCheckedRadioButtonId();
-                RadioButton rb = findViewById(selectedButtonId);
-                int stars = Integer.parseInt(rb.getText().toString());
                 DBHelper db = new DBHelper(MainActivity.this);
-                db.insertNote(text, stars);
-                db.close();
-                Toast.makeText(MainActivity.this, "Data Inserted", Toast.LENGTH_LONG).show();
+                boolean status = db.dbContain(text);
+                if (text.length() == 0 || status == true ) {
+                    Toast.makeText(MainActivity.this, "Cannot be empty and no duplicates", Toast.LENGTH_LONG).show();
+                } else {
+                    int selectedButtonId = rg.getCheckedRadioButtonId();
+                    RadioButton rb = findViewById(selectedButtonId);
+                    int stars = Integer.parseInt(rb.getText().toString());
+                    db.insertNote(text, stars);
+                    db.close();
+                    Toast.makeText(MainActivity.this, "Data Inserted", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
