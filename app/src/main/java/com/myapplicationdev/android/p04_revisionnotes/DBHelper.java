@@ -12,8 +12,12 @@ import java.util.ArrayList;
 public class DBHelper extends SQLiteOpenHelper {
 
 	//TODO Define the Database properties
-	private static final String DATABASE_NAME = "";
-	private static final int DATABASE_VERSION = ;
+	private static final String DATABASE_NAME = "revision.db";
+	private static final int DATABASE_VERSION = 1;
+	private static final String TABLE_NOTE = "revision";
+	private static final String COLUMN_ID = "_id";
+	private static final String COLUMN_NOTE_CONTENT = "noteContent";
+	private static final int COLUMN_STARS = 0;
 
 
 	public DBHelper(Context context) {
